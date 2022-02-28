@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Product } from './../../models/product';
+import { Component, OnDestroy } from '@angular/core';
+import { ProductService } from '../product.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnDestroy {
 
-  constructor() { }
+  productItems!: Product[];
+  filteredProducts!: Product[];
+  subscription!: Subscription;
 
-  ngOnInit(): void {
+  constructor(private productDataService: ProductService) {
+    //initialy load all products to productItems and filteredProducts
+    this.subscription = this.productDataService.getAllProducts()
+      .subscribe(products => this.filteredProducts = this.productItems = products);
+  }
+
+  filter(query: string) {
+    //filter productItems and assigned to filteredProducts
+    this.filteredProducts = (query) ? this.productItems
+      .filter(p => p.name.toLowerCase().includes(query.toLowerCase())) : this.productItems;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
