@@ -1,0 +1,29 @@
+<mat-card *ngIf="!(cartItemsCount | async)" class="empty-cart" mat-card-rb>
+  <mat-card-content>
+    <div class="mat-headline">
+      <h2>Your cart is empty</h2>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(cartItemsCount | async)" class="sc-checkout mat-card-rb">
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item class="mat-header">
+        <div>Items ({{cartItemsCount | async}})</div>
+        <div class="spacer"></div>
+        <div>{{cartSubTotal | async | currency}}</div>
+      </mat-list-item>
+
+      <mat-list-item class="mat-details">
+        <div class="list-item-wrapper">
+          <div *ngFor="let cartItem of cartItems | async" class="list-item-row">
+            <div class="item-list-name">{{cartItem.name}}</div>
+            <div class="item-list-price">{{cartItem.price}}</div>
+          </div>
+        </div>
+      </mat-list-item>
+
+    </mat-list>
+  </mat-card-content>
+</mat-card>

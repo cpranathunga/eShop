@@ -1,0 +1,6 @@
+<div class="card-header">
+  <span mat-raised-button color="accent" (click)="clearItemsInCart()">
+    <mat-icon>delete_forever</mat-icon>
+  </span>
+  <mat-icon matBadgeColor="accent" [matBadge]="totalItemsInCart$ | async">shopping_cart</mat-icon>
+</div>

@@ -1,24 +1,30 @@
-<div class="searchComp">
-  <input #query (keyup)="filter(query.value)" class="form-control" type="text" placeholder="Search">
-</div>
+<div class="main-container">
+  <mat-form-field class="example-full-width w-60" appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput #query (keyup)="filter(query.value)" class="form-control" type="text" placeholder="Search">
+  </mat-form-field>
 
-<div class="container">
-  <div class="card-data">
-    <div *ngFor="let product of filteredProducts">
-      <mat-card class="mat-cards">
+  <div class="container">
+    <div class="card-data">
+      <mat-card class="mat-cards" *ngFor="let product of filteredProducts">
         <img mat-card-image src="{{product.defaultImage}}" alt="{{product.name}}">
         <mat-card-content>
           <p>{{product.name}} : $ {{product.price}}</p>
         </mat-card-content>
         <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="addItemToCart(product)">
+            <mat-icon>add_shopping_cart</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
-  </div>
-  <div class="cart-data">
-    <mat-card>
-      <mat-card-content>
-      </mat-card-content>
-    </mat-card>
+    <div class="cart-data">
+      <mat-card class="mat-card-rb">
+        <mat-card-content>
+          <app-cart-item-count></app-cart-item-count>
+          <app-shopping-cart></app-shopping-cart>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>
