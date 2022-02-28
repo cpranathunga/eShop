@@ -1,0 +1,24 @@
+<div class="searchComp">
+  <input #query (keyup)="filter(query.value)" class="form-control" type="text" placeholder="Search">
+</div>
+
+<div class="container">
+  <div class="card-data">
+    <div *ngFor="let product of filteredProducts">
+      <mat-card class="mat-cards">
+        <img mat-card-image src="{{product.defaultImage}}" alt="{{product.name}}">
+        <mat-card-content>
+          <p>{{product.name}} : $ {{product.price}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="cart-data">
+    <mat-card>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
